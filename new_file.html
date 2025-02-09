@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生日快乐</title>
+    <style>
+        /* 基础样式 */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffcccb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow: hidden; /* 隐藏页面溢出内容 */
+            position: relative;
+        }
+
+        h1 {
+            color: #d32f2f;
+            font-size: 3em;
+            margin-bottom: 20px;
+            opacity: 0; /* 初始隐藏 */
+            animation: fadeIn 2s forwards; /* 淡入动画 */
+        }
+
+        p {
+            color: #333;
+            font-size: 1.5em;
+            opacity: 0; /* 初始隐藏 */
+            animation: fadeIn 2s 1s forwards; /* 延迟淡入 */
+        }
+
+        .cake {
+            font-size: 4em;
+            margin-top: 20px;
+            cursor: pointer;
+            opacity: 0; /* 初始隐藏 */
+            animation: fadeIn 2s 2s forwards; /* 延迟淡入 */
+        }
+
+        /* GIF 动图样式 */
+        .gif-container {
+            margin: 20px 0;
+        }
+
+        .gif-container img {
+            width: 200px; /* 根据需要调整大小 */
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* 飘落的气球 */
+        .balloon {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            background-color: #ff4081;
+            border-radius: 50%;
+            bottom: -100px;
+            animation: float 6s infinite ease-in;
+        }
+
+        .balloon::before {
+            content: '';
+            width: 2px;
+            height: 60px;
+            background-color: #ff4081;
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .balloon:nth-child(2) {
+            background-color: #ffeb3b;
+            left: 20%;
+            animation-duration: 8s;
+        }
+
+        .balloon:nth-child(3) {
+            background-color: #03a9f4;
+            left: 50%;
+            animation-duration: 7s;
+        }
+
+        .balloon:nth-child(4) {
+            background-color: #8bc34a;
+            left: 80%;
+            animation-duration: 9s;
+        }
+
+        /* 气球动画 */
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-100vh);
+            }
+        }
+
+        /* 淡入动画 */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* 彩带效果 */
+        .ribbon {
+            position: absolute;
+            top: -50px;
+            width: 100%;
+            height: 50px;
+            background-color: #d32f2f;
+            animation: dropRibbon 1s forwards;
+        }
+
+        @keyframes dropRibbon {
+            0% {
+                top: -50px;
+            }
+            100% {
+                top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 彩带 -->
+    <div class="ribbon"></div>
+
+    <!-- 主要内容 -->
+    <div>
+        <h1>生日快乐！</h1>
+        <!-- 插入 GIF 动图 -->
+        <div class="gif-container">
+            <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExamI4bmIxdWpjNGgxdTBzOGYxdXpkcmd3c3BlNzU4eXF5c3k0MDB2eiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eRXQ9JRiOHSNwVoGxt/giphy.gif" alt="生日快乐 GIF">
+        </div>
+        <p>愿你每天都充满快乐与幸福，愿所有的美好都围绕着你！</p>
+        <div class="cake" onclick="showMessage()">🎂</div>
+    </div>
+
+    <!-- 飘落的气球 -->
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+
+    <!-- 隐藏的祝福语 -->
+    <div id="hiddenMessage" class="hidden-message">
+        <p>🎉 祝你生日快乐，梦想成真！🎉</p>
+    </div>
+
+    <!-- 生日歌音频 -->
+    <audio id="birthdaySong" autoplay loop>
+		<source src="https://www.voicy.network/sounds/dbr15Cs6FkWyTk5L1CIX2Q-happy-happy-happy.wav" type="audio/wav">
+        <source src="https://www.voicy.network/sounds/dbr15Cs6FkWyTk5L1CIX2Q-happy-happy-happy.MP3" type="audio/mpeg">
+		<source src="https://www.voicy.network/sounds/dbr15Cs6FkWyTk5L1CIX2Q-happy-happy-happy.ogg" type="audio/ogg">
+    </audio>
+
+    <script>
+        // 自动播放生日歌
+        window.onload = function () {
+            const audio = document.getElementById('birthdaySong');
+            audio.play().catch(() => {
+                // 如果自动播放失败，提示用户点击页面播放
+                alert("点击页面播放生日歌！");
+            });
+        };
+
+        // 点击蛋糕显示隐藏的祝福语
+        function showMessage() {
+            const message = document.getElementById('hiddenMessage');
+            message.style.display = 'block';
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 3000); // 5秒后隐藏
+        }
+    </script>
+</body>
+</html>
